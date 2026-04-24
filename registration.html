@@ -37,19 +37,74 @@
             </div>
         </div>
     </nav>
+    
+    <section class="mb-5">
 
-    <h1>Registration</h1>
+        
+        <section class="container mt-5">
 
-        <section class="card shadow-sm border-0" style="max-width: 400px;">
-            <div class="card-body">
-                <h2 class="card-title fw-bold">Registered Pets</h2>
-                
-                <div>
-                    <ol id="pet-list">
-                        </ol>
+        
+        <h2>Registration</h2>
+        <div class="card bg-light border-1 p-4 m-4">
+            <form id="petRegistrationForm">
+                <div class="mb-3">
+                    <label for="petName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="petName" placeholder="Walter">
                 </div>
-            </div>
+                
+                <div class="mb-3">
+                    <label for="petAge" class="form-label">Age</label>
+                    <input type="number" class="form-control" id="petAge" placeholder="7">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="petBreed" class="form-label">Breed</label>
+                    <input type="text" class="form-control" id="petBreed" placeholder="Mixed">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="petGender" class="form-label">Gender</label>
+                    <select class="form-select" id="petGender">
+                        <option selected>Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="petService" class="form-label">Service</label>
+                    <select class="form-select" id="petService">
+                        <option selected>Select service</option>
+                        <option value="Bath">Bath</option>
+                        <option value="Grooming">Grooming</option>
+                        <option value="Nail Trim">Nail Trim</option>
+                    </select>
+                </div>
+                
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <button type="button" class="btn btn-primary" onclick="registerPet()">Register</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form>
+        </div>
+
+                    <h2 class="fw-bold">Registered Pets</h2>
+            <table class="table table-striped table-hover mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Service</th>
+                        <th>Breed</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="pet-table-body">
+                    </tbody>
+            </table>
         </section>
+    </section>
     
 
 
