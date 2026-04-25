@@ -18,15 +18,34 @@ function saveStudent(event){
 
     const body = document.getElementById("body");
 
-    const row = document.createElement("tr");
-    row.innerHTML = `
-    <td> ${newStudent.name} </td> 
-    <td> ${newStudent.age} </td> 
-    <td> ${newStudent.course} </td> 
-    `;
+    const row = displayRow(newStudent);
+
     body.appendChild(row);
 
 
     studentForm.reset();
 }
 
+
+function displayRow(newStudent){ 
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+    <td> ${newStudent.name} </td> 
+    <td> ${newStudent.age} </td> 
+    <td> ${newStudent.course} </td>
+    <td> <button class="btn btn-danger delete-btn"> Delete </button> </td> 
+    `;
+
+    // Delete functionality
+    row.querySelector(".delete-btn").addEventListener("click", function (event){
+        //console.log(event);
+        const confirmation = confirm("Are you sure you want to delete this row?");
+
+        if (confirmation){
+            row.remove();
+        }
+    });
+
+    return row;
+}
