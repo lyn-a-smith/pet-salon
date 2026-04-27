@@ -31,22 +31,40 @@ function displayRow() {
     for (let i = 0; i < petsList.length; i++) {
         let pet = petsList[i];
 
-        // Create the HTML row for each pet
-        let row = `
-            <tr>
-                <td>${pet.name}</td>
-                <td>${pet.age}</td>
-                <td>${pet.gender}</td>
-                <td>${pet.service}</td>
-                <td>${pet.breed}</td>
-                <td>
-                    <button class="btn btn-danger btn-sm">Delete</button>
-                </td>
-            </tr>
+        // Create an actual HTML element instead of a text string
+        let row = document.createElement("tr");
+
+        // Add the columns and the button inside the element
+        row.innerHTML = `
+            <td>${pet.name}</td>
+            <td>${pet.age}</td>
+            <td>${pet.gender}</td>
+            <td>${pet.service}</td>
+            <td>${pet.breed}</td>
+            <td>
+                <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+            </td>
         `;
 
-        // Append the row to the table body
-        tableBody.innerHTML += row;
+        // Add the delete functionality to this specific row
+        row.querySelector(".delete-btn").addEventListener("click", function (event){
+            // Added the pet's name to the confirmation for a better user experience!
+            const confirmation = confirm("Are you sure you want to delete " + pet.name + "?");
+
+            if (confirmation){
+                // Remove the row from the screen
+                row.remove(); 
+                
+                // Remove the pet from the underlying data array
+                petsList.splice(i, 1); 
+                
+                // Redraw the table so the index numbers in the loop stay accurate
+                displayRow(); 
+            }
+        });
+
+        // Append the completed row to the table body
+        tableBody.appendChild(row);
     }
 }
 
@@ -58,6 +76,12 @@ function registerPet() {
     const breedInput = document.getElementById("petBreed").value;
     const genderInput = document.getElementById("petGender").value;
     const serviceInput = document.getElementById("petService").value;
+
+    // Validate inputs (Optional but recommended to prevent empty submissions)
+    if(nameInput === "" || ageInput === "") {
+        alert("Please fill out the required fields!");
+        return; 
+    }
 
     // Create a new Pet object
     const newPet = new Pet(nameInput, ageInput, breedInput, genderInput, serviceInput);

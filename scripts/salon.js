@@ -1,6 +1,6 @@
 // 1. Create the salon object literal
 const salon = {
-    name: "Happy Paws Pet Salon",
+    name: "Serinity Paws Pet Salon",
     hours: {
         open: "9:00 AM",
         close: "6:00 PM"
