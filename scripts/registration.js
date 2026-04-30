@@ -68,18 +68,47 @@ function displayRow() {
     }
 }
 
+
+
 // 5. Function to register a new pet from the form
 function registerPet() {
     // Get the values from the HTML inputs
-    const nameInput = document.getElementById("petName").value;
-    const ageInput = document.getElementById("petAge").value;
-    const breedInput = document.getElementById("petBreed").value;
+    const nameInput = document.getElementById("petName").value.trim();
+    const ageInput = document.getElementById("petAge").value.trim();
+    const breedInput = document.getElementById("petBreed").value.trim();
     const genderInput = document.getElementById("petGender").value;
     const serviceInput = document.getElementById("petService").value;
 
-    // Validate inputs (Optional but recommended to prevent empty submissions)
-    if(nameInput === "" || ageInput === "") {
-        alert("Please fill out the required fields!");
+    let isValid = true; // Create a flag to track if the form is good to go
+
+    // First, reset all borders back to default in case they fixed a previous error
+    $(".form-control, .form-select").css("border-color", "");
+
+    // Validate inputs individually
+    if (nameInput === "") {
+        $("#petName").css("border-color", "red");
+        isValid = false;
+    } 
+    if (ageInput === "") {
+        $("#petAge").css("border-color", "red");
+        isValid = false;
+    } 
+    if (breedInput === "") {
+        $("#petBreed").css("border-color", "red");
+        isValid = false;
+    } 
+    // Check against both the default disabled option and an empty string
+    if (genderInput === "Select gender" || genderInput === "") {
+        $("#petGender").css("border-color", "red");
+        isValid = false;
+    } 
+    if (serviceInput === "Select service" || serviceInput === "") {
+        $("#petService").css("border-color", "red");
+        isValid = false;
+    }
+
+    // If any of the checks failed, this stops the function
+    if (!isValid) {
         return; 
     }
 
@@ -95,6 +124,5 @@ function registerPet() {
     // Update the table to show the new pet
     displayRow();
 }
-
 // 6. Call the function to display the initial pets when the page loads
 displayRow();
