@@ -1,32 +1,18 @@
-// 1. Create the salon object literal
 const salon = {
-    name: "Serinity Paws Pet Salon",
-    hours: {
-        open: "9:00 AM",
-        close: "6:00 PM"
-    },
+    name: "Tranquility Paws Pet Salon",
+    hours: { open: "9:00 AM", close: "6:00 PM" },
     phone: "111-555-1234",
-    address: {
-        street: "123 Main Street",
-        city: "San Diego",
-        state: "CA",
-        zip: "1234"
-    }
+    address: { street: "123 Main Street", city: "San Diego", state: "CA", zip: "1234" }
 };
 
-// 2. Create the display function
 function displaySalonInfo() {
-    // 3. Concatenate the string 
-    const infoText = "Welcome to " + salon.name + "! We are located at " + 
-                     salon.address.street + ", " + salon.address.city + ", " + 
-                     salon.address.state + " " + salon.address.zip + 
-                     ". Our hours of operation are from " + salon.hours.open + 
-                     " to " + salon.hours.close + ". You can contact us at " + 
-                     salon.phone + ".";
+    // Injecting the translation spans directly into the HTML string
+    const infoText = `
+        <span class="lang-en">Welcome to <strong>${salon.name}</strong>! We are located at <strong>${salon.address.street}, ${salon.address.city}, ${salon.address.state} ${salon.address.zip}</strong>. Our hours of operation are from <strong>${salon.hours.open}</strong> to <strong>${salon.hours.close}</strong>. You can contact us at <strong>${salon.phone}</strong>.</span>
+        <span class="lang-es">¡Bienvenido a <strong>${salon.name}</strong>! Estamos ubicados en <strong>${salon.address.street}, ${salon.address.city}, ${salon.address.state} ${salon.address.zip}</strong>. Nuestro horario de atención es de <strong>${salon.hours.open}</strong> a <strong>${salon.hours.close}</strong>. Puede contactarnos al <strong>${salon.phone}</strong>.</span>
+    `;
 
-    // Target the container in index.html and insert the <p> tag
-    document.getElementById("salon-info-container").innerHTML = "<p>" + infoText + "</p>";
+    $("#salon-info-container").html(`<p>${infoText}</p>`);
 }
 
-// Execute the function
 displaySalonInfo();

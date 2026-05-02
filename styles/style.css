@@ -1,42 +1,134 @@
-/* Earth Tone Palette & Base styles */
+/* Color Palette Variables */
+:root {
+    /* Backgrounds */
+    --bg-body: #F9F8F6;
+    --bg-card: #FFFFFF;
+    --bg-hero: #DDA15E;
+    --bg-placeholder: #EAE2D6;
+    
+    /* Navigation */
+    --nav-bg: #6B705C;
+    --nav-link: #E2E0D4;
+    --nav-link-active: #FFFFFF;
+
+    /* Text Colors */
+    --text-main: #3E3B39;
+    --text-heading: #463F3A;
+    --text-muted: #8C867C;
+    --text-light: #FFFFFF;
+
+    /* Accents & Buttons */
+    --accent-terracotta: #CB997E;
+    --btn-primary: #A5A58D;
+    --btn-primary-hover: #6B705C;
+    --border-placeholder: #BDB7AB;
+    
+    /* Shadows */
+    --shadow-sm: rgba(0, 0, 0, 0.05);
+    --shadow-md: rgba(0, 0, 0, 0.03);
+}
+
+/* Dark Mode Variable Overrides */
+body.dark-mode {
+    --bg-body: #2B2D24;          /* Darker earthy charcoal */
+    --bg-card: #3A3D32;          /* Muted dark olive card */
+    --bg-hero: #8B5E34;          /* Deeper terracotta/ochre */
+    --bg-placeholder: #3F4238;
+    
+    --text-main: #F1F1E6;        /* Light cream text */
+    --text-heading: #FFFFFF;     /* Pure white for headers */
+    --text-muted: #A5A58D;
+    
+    --nav-bg: #4A4E40;           /* Darker sage for the navbar */
+    --border-placeholder: #525648;
+    
+    --shadow-sm: rgba(0, 0, 0, 0.3);
+    --shadow-md: rgba(0, 0, 0, 0.5);
+}
+
+/* --- Dark Mode Bootstrap Overrides --- */
+
+/* 1. Fix text-muted so subtitles and labels are readable */
+body.dark-mode .text-muted {
+    color: var(--text-muted) !important; 
+}
+
+/* 2. Style form inputs and selects to be dark gray */
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+    background-color: #4A4D42; /* A dark gray/olive to match your palette */
+    color: var(--text-main);   /* Light text when the user types */
+    border-color: var(--border-placeholder);
+}
+
+/* 3. Make placeholder text visible against the dark gray inputs */
+body.dark-mode .form-control::placeholder {
+    color: #BDB7AB;
+    opacity: 0.8;
+}
+
+/* 4. Fix the hardcoded white background on the Services page form */
+body.dark-mode .bg-light {
+    background-color: var(--bg-card) !important;
+}
+
+/* --- Language Toggle Logic --- */
+
+/* 1. Hide Spanish text by default */
+.lang-es {
+    display: none;
+}
+
+/* 2. When spanish-mode is active, hide English */
+body.spanish-mode .lang-en {
+    display: none;
+}
+
+/* 3. When spanish-mode is active, show Spanish */
+body.spanish-mode .lang-es {
+    display: inline;
+}
+
+/* --- Base styles --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #F9F8F6; /* Soft warm off-white */
-    color: #3E3B39; /* Dark warm grey for readability */
+    background-color: var(--bg-body);
+    color: var(--text-main);
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for dark mode */
 }
 
 /* Navigation Bar */
 .navbar {
-    background-color: #6B705C; /* Modern Sage Green */
+    background-color: var(--nav-bg);
     padding: 15px 30px;
     border-bottom: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px var(--shadow-sm);
 }
 
 .navbar .nav-link {
     font-size: 18px;
-    color: #E2E0D4; /* Light beige for unselected links */
+    color: var(--nav-link);
     transition: color 0.3s ease-in-out;
 }
 
 .navbar .nav-link:hover, 
 .navbar .nav-link.active {
-    color: #FFFFFF; /* White for active/hover */
+    color: var(--nav-link-active);
     font-weight: 500;
 }
 
 .navbar .navbar-brand {
     font-size: 24px;
     font-weight: 700;
-    color: #FFFFFF; 
+    color: var(--nav-link-active);
     margin-right: 20px;
 }
 
 /* Headings */
 h1, h2, h3 {
-    color: #463F3A;
+    color: var(--text-heading);
     font-weight: 700;
 }
 
@@ -54,60 +146,61 @@ h2 {
     display: inline-block;
 }
 
-/* Terracotta underline accent for h2 */
+
+/* Underline accent for h2 */
 h2::after {
     content: '';
     display: block;
     width: 60px;
     height: 4px;
-    background-color: #CB997E; 
+    background-color: var(--accent-terracotta); 
     margin-top: 8px;
     border-radius: 2px;
 }
 
-/* Buttons (Customizing Bootstrap primary buttons to fit the theme) */
+/* Buttons */
 .btn-primary {
-    background-color: #A5A58D; /* Muted olive */
-    border-color: #A5A58D;
+    background-color: var(--btn-primary);
+    border-color: var(--btn-primary);
 }
 
 .btn-primary:hover {
-    background-color: #6B705C;
-    border-color: #6B705C;
+    background-color: var(--btn-primary-hover);
+    border-color: var(--btn-primary-hover);
 }
 
 /* Custom Sections */
 .hero-section {
-    background-color: #DDA15E; /* Warm earthy ochre */
-    color: white;
+    background-color: var(--bg-hero);
+    color: var(--text-light);
     padding: 60px 30px;
     border-radius: 12px;
     margin-bottom: 40px;
 }
 
 .hero-section h1 {
-    color: white;
+    color: var(--text-light);
 }
 
 /* Testimonial Cards */
 .testimonial-card {
-    background-color: #FFFFFF;
-    border-left: 5px solid #CB997E; /* Terracotta accent border */
+    background-color: var(--bg-card);
+    border-left: 5px solid var(--accent-terracotta);
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 15px var(--shadow-md);
     height: 100%;
 }
 
 /* Image Placeholders */
 .img-placeholder {
-    background-color: #EAE2D6;
-    border: 2px dashed #BDB7AB;
+    background-color: var(--bg-placeholder);
+    border: 2px dashed var(--border-placeholder);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #8C867C;
+    color: var(--text-muted);
     font-weight: bold;
     font-size: 14px;
     text-transform: uppercase;
