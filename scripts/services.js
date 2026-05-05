@@ -19,6 +19,17 @@ $("#servicesForm").submit(function(event){
     const description = $("#serviceDescription").val().trim();
     const price = $("#servicePrice").val().trim();
 
+    /////////////////////////////////////////////////////////////////////
+    // Get the current value from the local storage or create the array
+    let services = JSON.parse(localStorage.getItem("services")) || [];
+    // Add the username to the users list
+    services.push(name);
+    // Save it to local storage
+    localStorage.setItem("services", JSON.stringify(services));
+    ///////////////////////////////////////////////////////////////////
+
+    
+
     let isValid = true;
 
     // Reset borders to default before validating

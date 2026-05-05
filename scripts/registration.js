@@ -85,3 +85,28 @@ function registerPet() {
 }
 
 displayRow();
+
+// Function to load custom services from localStorage into the dropdown
+function loadCustomServices() {
+    // 1. Target the dropdown element
+    const serviceDropdown = document.getElementById("petService");
+
+    // 2. Retrieve the services array from localStorage (or default to empty array if none exist)
+    const storedServices = JSON.parse(localStorage.getItem("services")) || [];
+
+    // 3. Loop through the array and create a new option for each service
+    storedServices.forEach(serviceName => {
+        // Create a new <option> element
+        const option = document.createElement("option");
+        
+        // Set both the value and the visible text to the service name
+        option.value = serviceName;
+        option.textContent = serviceName;
+        
+        // Append the new option to the dropdown menu
+        serviceDropdown.appendChild(option);
+    });
+}
+
+// Call the function so it runs immediately when the registration page loads
+loadCustomServices();
